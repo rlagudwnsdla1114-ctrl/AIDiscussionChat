@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>애니 채팅 - DebateMind</title>
+    <meta property="og:title" content="애니 채팅 - DebateMind" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html { line-height: 1.15; }
+      body { margin: 0; }
+      * { box-sizing: border-box; border-width: 0; border-style: solid; -webkit-font-smoothing: antialiased; }
+      p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption { margin: 0; padding: 0; }
+      button { background-color: transparent; }
+      button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; line-height: 1.15; margin: 0; }
+      button, select { text-transform: none; }
+      button, [type="button"], [type="reset"], [type="submit"] { -webkit-appearance: button; color: inherit; }
+      button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner { border-style: none; padding: 0; }
+      button:-moz-focus, [type="button"]:-moz-focus, [type="reset"]:-moz-focus, [type="submit"]:-moz-focus { outline: 1px dotted ButtonText; }
+      a { color: inherit; text-decoration: inherit; }
+      pre { white-space: normal; }
+      input { padding: 2px 4px; }
+      img { display: block; }
+      html { scroll-behavior: smooth; }
+    </style>
+    <style data-tag="default-style-sheet">
+      html { font-family: Roboto; font-size: 1rem; }
+      body { font-weight: 400; font-style: normal; letter-spacing: 0.03em; line-height: 1.6; color: var(--color-on-surface); background: var(--color-surface); fill: var(--color-on-surface); }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;500;600;700&display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+  </head>
+  <body>
+    <link rel="stylesheet" href="./style.css" />
+    <div>
+      <link href="./anime-chat.css" rel="stylesheet" />
+      <div class="page-container1">
+        <navigation-wrapper class="navigation-wrapper">
+          <div class="navigation-container1">
+            <nav class="navigation-root">
+              <div class="navigation-container">
+                <a href="index.html"><div aria-label="DebateMind Home" class="navigation-logo-link"><span class="navigation-brand section-title">DebateMind</span></div></a>
+                <div class="navigation-desktop-menu">
+                  <a href="index.html"><div class="navigation-link"><span>소개</span></div></a>
+                  <a href="anime-chat.html"><div class="navigation-link"><span>애니 채팅</span></div></a>
+                  <a href="drama-chat.html"><div class="navigation-link"><span>드라마 채팅</span></div></a>
+                </div>
+                <button id="mobileNavToggle" aria-label="Open Menu" aria-expanded="false" class="navigation-mobile-toggle"><svg fill="none" width="24" xmlns="http://www.w3.org/2000/svg" height="24" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+              </div>
+            </nav>
+            <div id="mobileNavOverlay" aria-hidden="true" class="navigation-mobile-overlay">
+              <div class="navigation-overlay-header">
+                <a href="index.html"><div aria-label="DebateMind Home" class="navigation-logo-link"><span class="navigation-brand section-title">DebateMind</span></div></a>
+                <button id="mobileNavClose" aria-label="Close Menu" class="navigation-mobile-close"><svg fill="none" width="24" xmlns="http://www.w3.org/2000/svg" height="24" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+              </div>
+              <div class="navigation-overlay-content">
+                <a href="index.html"><div class="navigation-overlay-link"><span>소개</span></div></a>
+                <a href="anime-chat.html"><div class="navigation-overlay-link"><span>애니 채팅</span></div></a>
+                <a href="drama-chat.html"><div class="navigation-overlay-link"><span>드라마 채팅</span></div></a>
+              </div>
+            </div>
+            <div class="navigation-container2"><div class="navigation-container3"><script defer="" data-name="navigation-logic">document.addEventListener('DOMContentLoaded', function(){(function(){const mobileNavToggle=document.getElementById('mobileNavToggle');const mobileNavClose=document.getElementById('mobileNavClose');const mobileNavOverlay=document.getElementById('mobileNavOverlay');function openMobileNav(){mobileNavOverlay.setAttribute('aria-hidden','false');mobileNavToggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}function closeMobileNav(){mobileNavOverlay.setAttribute('aria-hidden','true');mobileNavToggle.setAttribute('aria-expanded','false');document.body.style.overflow='';}mobileNavToggle.addEventListener('click',openMobileNav);mobileNavClose.addEventListener('click',closeMobileNav);mobileNavOverlay.querySelectorAll('.navigation-overlay-link').forEach((link)=>{link.addEventListener('click',closeMobileNav);});document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&mobileNavOverlay.getAttribute('aria-hidden')==='false'){closeMobileNav();}});})();});</script></div></div>
+          </div>
+        </navigation-wrapper>
+
+        <main class="unified-chat-page anime-theme">
+          <aside class="unified-chat-sidebar">
+            <div class="sidebar-panel">
+              <div class="sidebar-panel-header">
+                <div>
+                  <p class="sidebar-eyebrow">대화 기록</p>
+                  <h2 class="sidebar-heading">최근 대화</h2>
+                </div>
+                <button id="newChatBtn" class="btn-sm btn-primary btn"><span>새 대화</span></button>
+              </div>
+              <nav id="recentChatsList" class="history-list"></nav>
+            </div>
+          </aside>
+
+          <section class="unified-chat-main">
+            <header class="chat-page-hero">
+              <div class="hero-badge-row">
+                <span class="chat-domain-badge">Anime Chat</span>
+                <span class="chat-domain-note">애니 토론 · 추천 · 설명 AI</span>
+              </div>
+              <h1 class="hero-title">애니 채팅</h1>
+              <p class="hero-subtitle">
+                애니 작품, 캐릭터, 작화, 전개, 결말에 대해 자연스럽게 이야기해보세요.
+                DebateMind는 단순 추천만이 아니라 의견을 나누는 토론형 대화도 함께 도와줍니다.
+              </p>
+              <div class="hero-capabilities">
+                <span class="hero-capability">토론 가능</span>
+                <span class="hero-capability">취향 추천</span>
+                <span class="hero-capability">설정 설명</span>
+              </div>
+            </header>
+
+            <div class="chat-content-shell">
+              <aside class="feature-card-panel">
+                <section class="feature-panel-card">
+                  <div class="feature-panel-header">
+                    <p class="feature-kicker">이 AI가 할 수 있는 것</p>
+                    <h2 class="section-subtitle">토론, 추천, 설명</h2>
+                  </div>
+                  <div class="feature-list">
+                    <article class="feature-item">
+                      <span class="feature-tag">토론</span>
+                      <p class="feature-copy">애니 작품에 대해 토론할 수 있어요.</p>
+                      <p class="feature-copy">캐릭터, 전개, 결말에 대해 의견을 나눌 수 있어요.</p>
+                    </article>
+                    <article class="feature-item">
+                      <span class="feature-tag">추천</span>
+                      <p class="feature-copy">취향에 맞는 애니를 추천받을 수 있어요.</p>
+                    </article>
+                    <article class="feature-item">
+                      <span class="feature-tag">설명</span>
+                      <p class="feature-copy">작품 설정이나 내용을 설명받을 수 있어요.</p>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="feature-panel-card prompt-card">
+                  <div class="feature-panel-header">
+                    <p class="feature-kicker">바로 시작하기</p>
+                    <h3 class="section-subtitle">예시 질문</h3>
+                  </div>
+                  <div class="prompt-list" id="suggestionChips">
+                    <button class="prompt-chip">이 애니 결말 어떻게 생각해?</button>
+                    <button class="prompt-chip">이 캐릭터 행동 이해돼?</button>
+                    <button class="prompt-chip">볼만한 애니 추천해줘</button>
+                    <button class="prompt-chip">이 작품 설정 설명해줘</button>
+                  </div>
+                </section>
+              </aside>
+
+              <section class="chat-panel">
+                <div class="chat-panel-header">
+                  <div>
+                    <p class="chat-panel-kicker">실시간 대화</p>
+                    <h2 class="section-subtitle">애니에 대한 생각을 이어가보세요</h2>
+                  </div>
+                  <div class="chat-panel-actions">
+                    <button id="summarizeBtn" class="btn-sm btn btn-outline">대화 요약</button>
+                    <button id="saveBtn" class="btn-sm btn btn-outline">저장</button>
+                  </div>
+                </div>
+
+                <div id="chatFlowArea" class="unified-chat-messages" aria-live="polite"></div>
+
+                <footer class="chat-input-panel">
+                  <label class="input-panel-label" for="chatInput">입력 영역</label>
+                  <div class="input-panel-shell">
+                    <textarea id="chatInput" rows="1" placeholder="예: 이 캐릭터 선택이 이해되는지 같이 얘기해보자"></textarea>
+                    <button id="sendBtn" class="btn-accent btn"><span>전송</span><svg fill="none" width="18" xmlns="http://www.w3.org/2000/svg" height="18" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zm7.318-19.539l-10.94 10.939"></path></svg></button>
+                  </div>
+                </footer>
+              </section>
+            </div>
+          </section>
+        </main>
+
+        <div class="page-container2"><div class="page-container3"><script defer="" data-name="anime-chat-logic">document.addEventListener('DOMContentLoaded',function(){(function(){const chatInput=document.getElementById('chatInput');const sendBtn=document.getElementById('sendBtn');const chatFlowArea=document.getElementById('chatFlowArea');const suggestionChips=document.querySelectorAll('.prompt-chip');const newChatBtn=document.getElementById('newChatBtn');const recentChatsList=document.getElementById('recentChatsList');const summarizeBtn=document.getElementById('summarizeBtn');const saveBtn=document.getElementById('saveBtn');const guideMessage='애니에 대해 편하게 이야기해보세요. 작품, 캐릭터, 작화, 전개, 결말에 대한 감상이나 토론 주제도 좋아요.';const storageKey='debateMind:anime-chats';const maxRecentChats=5;const defaultTitle='새 대화';let state={conversations:[],activeId:null};function loadConversations(){try{const saved=JSON.parse(localStorage.getItem(storageKey)||'null');if(saved&&Array.isArray(saved.conversations)){state.conversations=saved.conversations.map((conversation)=>({id:conversation.id||String(Date.now()),title:conversation.title||'',messages:Array.isArray(conversation.messages)?conversation.messages:[],createdAt:conversation.createdAt||Date.now()}));}}catch(error){state={conversations:[],activeId:null};}state.activeId=null;}function persistState(){localStorage.setItem(storageKey,JSON.stringify(state));}function truncateTitle(text){const normalized=(text||'').replace(/\s+/g,' ').trim();return normalized.length>18?normalized.slice(0,18)+'...':normalized;}function cleanTitleText(text){return text.replace(/[?!.]+$/g,'').replace(/^(요즘|진짜|약간)\s*/,'').replace(/\s+/g,' ').trim();}function generateTitle(messages){const userMessage=messages.find((message)=>message.role==='user')?.text||'';const assistantMessage=messages.find((message)=>message.role==='assistant')?.text||'';const source=`${userMessage} ${assistantMessage}`;if(!userMessage||!assistantMessage)return defaultTitle;if(source.includes('결말'))return '결말 이야기';if(source.includes('캐릭터'))return '캐릭터 토론';if(source.includes('작화'))return '작화와 연출';if(source.includes('추천'))return '애니 추천';if(source.includes('설정'))return '작품 설정 설명';const compact=cleanTitleText(userMessage).replace(/(은|는|이|가|을|를|에|에서|으로|와|과|도|만)\s/g,' ').replace(/(것 같아|느낌이야|일까|걸까|일까요|같아)$/g,'').trim();return truncateTitle(compact||defaultTitle);}function createConversation(){const conversation={id:String(Date.now()),title:'',messages:[],createdAt:Date.now()};state.activeId=conversation.id;return conversation;}function getActiveConversation(){return state.conversations.find((conversation)=>conversation.id===state.activeId)||null;}function saveConversation(conversation,isNewConversation){const existingConversations=state.conversations.filter((item)=>item.id!==conversation.id);state.conversations=[conversation,...existingConversations];if(isNewConversation&&state.conversations.length>maxRecentChats){state.conversations=state.conversations.slice(0,maxRecentChats);}persistState();}function maybeAssignTitle(conversation){if(conversation.title)return;const hasUserMessage=conversation.messages.some((message)=>message.role==='user');const hasAssistantMessage=conversation.messages.some((message)=>message.role==='assistant');if(!hasUserMessage||!hasAssistantMessage)return;conversation.title=generateTitle(conversation.messages);}function renderGuideMessage(){const wrapper=document.createElement('div');wrapper.className='unified-chat-message ai-message';const bubble=document.createElement('div');bubble.className='unified-message-bubble';bubble.textContent=guideMessage;wrapper.appendChild(bubble);chatFlowArea.appendChild(wrapper);}function renderChatMessages(conversation){chatFlowArea.innerHTML='';renderGuideMessage();if(!conversation)return;conversation.messages.forEach((message)=>{const wrapper=document.createElement('div');wrapper.className=`unified-chat-message ${message.role==='user'?'user-message':'ai-message'}`;const bubble=document.createElement('div');bubble.className='unified-message-bubble';bubble.textContent=message.text;wrapper.appendChild(bubble);chatFlowArea.appendChild(wrapper);});chatFlowArea.scrollTop=chatFlowArea.scrollHeight;}function renderConversationList(){recentChatsList.innerHTML='';if(!state.conversations.length){const emptyState=document.createElement('div');emptyState.className='history-item empty';emptyState.textContent='최근 대화 없음';recentChatsList.appendChild(emptyState);return;}state.conversations.forEach((conversation)=>{const item=document.createElement('div');item.className='history-item';if(conversation.id===state.activeId)item.classList.add('active');item.dataset.chatId=conversation.id;const titleButton=document.createElement('button');titleButton.type='button';titleButton.className='history-item-title';titleButton.dataset.chatId=conversation.id;titleButton.textContent=conversation.title||defaultTitle;const deleteButton=document.createElement('button');deleteButton.type='button';deleteButton.className='history-item-delete';deleteButton.dataset.deleteId=conversation.id;deleteButton.textContent='삭제';item.appendChild(titleButton);item.appendChild(deleteButton);recentChatsList.appendChild(item);});}function loadConversation(id){const conversation=state.conversations.find((item)=>item.id===id);if(!conversation)return;state.activeId=id;persistState();renderConversationList();renderChatMessages(conversation);}function resetToNewChat(){state.activeId=null;persistState();renderConversationList();renderChatMessages(null);chatInput.value='';chatInput.style.height='auto';}function deleteConversation(id){const wasActive=state.activeId===id;state.conversations=state.conversations.filter((conversation)=>conversation.id!==id);if(wasActive){resetToNewChat();return;}persistState();renderConversationList();}function appendMessage(role,text){if(!text)return;const conversation=getActiveConversation();if(!conversation)return;conversation.messages.push({role,text});maybeAssignTitle(conversation);saveConversation(conversation,false);renderConversationList();renderChatMessages(conversation);}function addUserMessage(text){let conversation=getActiveConversation();const isNewConversation=!conversation;if(!conversation){conversation=createConversation();}conversation.messages.push({role:'user',text});saveConversation(conversation,isNewConversation);renderConversationList();renderChatMessages(conversation);}function handleSend(){const text=chatInput.value.trim();if(!text)return;addUserMessage(text);document.dispatchEvent(new CustomEvent('debateMind:anime-send',{detail:{text}}));chatInput.value='';chatInput.style.height='auto';}chatInput.addEventListener('input',()=>{chatInput.style.height='auto';chatInput.style.height=chatInput.scrollHeight+'px';});sendBtn.addEventListener('click',handleSend);chatInput.addEventListener('keypress',(e)=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();handleSend();}});suggestionChips.forEach((chip)=>{chip.addEventListener('click',()=>{chatInput.value=chip.textContent;chatInput.focus();chatInput.style.height='auto';chatInput.style.height=chatInput.scrollHeight+'px';});});newChatBtn.addEventListener('click',resetToNewChat);summarizeBtn.addEventListener('click',()=>{});saveBtn.addEventListener('click',persistState);recentChatsList.addEventListener('click',(e)=>{const deleteTarget=e.target.closest('[data-delete-id]');if(deleteTarget){e.stopPropagation();deleteConversation(deleteTarget.dataset.deleteId);return;}const target=e.target.closest('[data-chat-id]');if(!target)return;loadConversation(target.dataset.chatId);});document.addEventListener('debateMind:anime-receive',(event)=>{appendMessage('assistant',event.detail?.text?.trim());});loadConversations();persistState();renderConversationList();renderChatMessages(null);chatInput.value='';chatInput.style.height='auto';})();});</script></div></div>
+
+        <footer-wrapper class="footer-wrapper"><div class="footer-container"><footer class="footer-root"><div class="footer-container"><div class="footer-content"><div class="footer-brand-section"><h2 class="footer-brand-title">DebateMind</h2><p class="footer-brand-description">애니메이션과 드라마를 자유롭게 이야기하는 AI 채팅 프로젝트</p><p class="footer-brand-subtext">사용자의 생각을 이해하고 자연스럽게 대화를 이어갑니다.</p></div><div class="footer-nav-section"><div class="footer-nav-group"><span class="footer-group-label">서비스</span><ul class="footer-link-list"><li class="footer-link-item"><a href="index.html"><div class="footer-link"><span>소개</span></div></a></li><li class="footer-link-item"><a href="anime-chat.html"><div class="footer-link"><span>애니 채팅</span></div></a></li><li class="footer-link-item"><a href="drama-chat.html"><div class="footer-link"><span>드라마 채팅</span></div></a></li></ul></div></div></div><div class="footer-bottom"><div class="footer-divider"></div><div class="footer-legal-row"><p class="footer-copyright">&copy; 2024 DebateMind. All rights reserved.</p><div class="footer-legal-links"><a href="#"><div class="footer-legal-link"><span>이용약관</span></div></a><a href="#"><div class="footer-legal-link"><span>개인정보처리방침</span></div></a></div></div></div></div></footer></div></footer-wrapper>
+      </div>
+      <link rel="canonical" href="https://excited-leafy-lion-qsl7fk.teleporthq.site/anime-chat" />
+      <script src="./main.js"></script>
+    </div>
+  </body>
+</html>

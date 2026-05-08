@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>DebateMind - 애니메이션·드라마 AI 채팅</title>
+    <meta property="og:title" content="DebateMind - 애니메이션·드라마 AI 채팅" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html { line-height: 1.15; }
+      body { margin: 0; }
+      * { box-sizing: border-box; border-width: 0; border-style: solid; -webkit-font-smoothing: antialiased; }
+      p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption { margin: 0; padding: 0; }
+      button { background-color: transparent; }
+      button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; line-height: 1.15; margin: 0; }
+      button, select { text-transform: none; }
+      button, [type="button"], [type="reset"], [type="submit"] { -webkit-appearance: button; color: inherit; }
+      button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner { border-style: none; padding: 0; }
+      button:-moz-focus, [type="button"]:-moz-focus, [type="reset"]:-moz-focus, [type="submit"]:-moz-focus { outline: 1px dotted ButtonText; }
+      a { color: inherit; text-decoration: inherit; }
+      pre { white-space: normal; }
+      input { padding: 2px 4px; }
+      img { display: block; }
+      details { display: block; margin: 0; padding: 0; }
+      summary::-webkit-details-marker { display: none; }
+      [data-thq="accordion"] [data-thq="accordion-content"] { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; padding: 0; }
+      [data-thq="accordion"] details[data-thq="accordion-trigger"][open] + [data-thq="accordion-content"] { max-height: 1000vh; }
+      details[data-thq="accordion-trigger"][open] summary [data-thq="accordion-icon"] { transform: rotate(180deg); }
+      html { scroll-behavior: smooth; }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Roboto;
+        font-size: 1rem;
+      }
+
+      body {
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: 0.03em;
+        line-height: 1.6;
+        color: var(--color-on-surface);
+        background: var(--color-surface);
+        fill: var(--color-on-surface);
+      }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" data-tag="font" />
+    <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+  </head>
+  <body>
+    <link rel="stylesheet" href="./style.css" />
+    <div>
+      <link href="./index.css" rel="stylesheet" />
+
+      <div class="home-container1">
+        <navigation-wrapper class="navigation-wrapper">
+          <div class="navigation-container1">
+            <nav class="navigation-root">
+              <div class="navigation-container">
+                <a href="index.html">
+                  <div aria-label="DebateMind Home" class="navigation-logo-link">
+                    <span class="navigation-brand section-title">DebateMind</span>
+                  </div>
+                </a>
+                <div class="navigation-desktop-menu">
+                  <a href="index.html"><div class="navigation-link"><span>소개</span></div></a>
+                  <a href="anime-chat.html"><div class="navigation-link"><span>애니 채팅</span></div></a>
+                  <a href="drama-chat.html"><div class="navigation-link"><span>드라마 채팅</span></div></a>
+                </div>
+                <button id="mobileNavToggle" aria-label="Open Menu" aria-expanded="false" class="navigation-mobile-toggle">
+                  <svg fill="none" width="24" xmlns="http://www.w3.org/2000/svg" height="24" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </nav>
+            <div id="mobileNavOverlay" aria-hidden="true" class="navigation-mobile-overlay">
+              <div class="navigation-overlay-header">
+                <a href="index.html">
+                  <div aria-label="DebateMind Home" class="navigation-logo-link">
+                    <span class="navigation-brand section-title">DebateMind</span>
+                  </div>
+                </a>
+                <button id="mobileNavClose" aria-label="Close Menu" class="navigation-mobile-close">
+                  <svg fill="none" width="24" xmlns="http://www.w3.org/2000/svg" height="24" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="navigation-overlay-content">
+                <a href="index.html"><div class="navigation-overlay-link"><span>소개</span></div></a>
+                <a href="anime-chat.html"><div class="navigation-overlay-link"><span>애니 채팅</span></div></a>
+                <a href="drama-chat.html"><div class="navigation-overlay-link"><span>드라마 채팅</span></div></a>
+              </div>
+            </div>
+            <div class="navigation-container2">
+              <div class="navigation-container3">
+                <script defer="" data-name="navigation-logic">
+                  document.addEventListener('DOMContentLoaded', function() {
+                    (function() {
+                      const mobileNavToggle = document.getElementById('mobileNavToggle');
+                      const mobileNavClose = document.getElementById('mobileNavClose');
+                      const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+                      function openMobileNav() {
+                        mobileNavOverlay.setAttribute('aria-hidden', 'false');
+                        mobileNavToggle.setAttribute('aria-expanded', 'true');
+                        document.body.style.overflow = 'hidden';
+                      }
+
+                      function closeMobileNav() {
+                        mobileNavOverlay.setAttribute('aria-hidden', 'true');
+                        mobileNavToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                      }
+
+                      mobileNavToggle.addEventListener('click', openMobileNav);
+                      mobileNavClose.addEventListener('click', closeMobileNav);
+
+                      const overlayLinks = mobileNavOverlay.querySelectorAll('.navigation-overlay-link');
+                      overlayLinks.forEach((link) => {
+                        link.addEventListener('click', closeMobileNav);
+                      });
+
+                      document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && mobileNavOverlay.getAttribute('aria-hidden') === 'false') {
+                          closeMobileNav();
+                        }
+                      });
+                    })();
+                  });
+                </script>
+              </div>
+            </div>
+          </div>
+        </navigation-wrapper>
+
+        <section class="hero-section">
+          <div class="hero-video-container">
+            <video src="https://videos.pexels.com/video-files/27350259/12121214_640_360_24fps.mp4" loop="true" muted="true" autoplay="true" playsinline="true" class="hero-background-video"></video>
+            <div class="hero-overlay"></div>
+          </div>
+          <div class="hero-content-wrapper">
+            <div class="hero-text-block">
+              <h1 class="hero-title">애니메이션과 드라마를 자유롭게 이야기하는 AI</h1>
+              <p class="hero-subtitle">작품을 먼저 정하지 않아도 됩니다. 생각나는 대로 말하면 AI가 자연스럽게 대화를 이어갑니다.</p>
+              <div class="hero-cta-group">
+                <a href="anime-chat.html"><div class="btn-primary btn btn-xl"><span>애니 채팅 시작하기</span></div></a>
+                <a href="drama-chat.html"><div class="btn btn-xl btn-outline hero-btn-secondary"><span>드라마 채팅 시작하기</span></div></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="intro-section">
+          <div class="intro-container">
+            <div class="intro-card">
+              <h2 class="section-title">작품보다 중요한 건 당신의 생각입니다</h2>
+              <p class="section-content">DebateMind는 특정 작품만 분석하는 서비스가 아닙니다. 사용자가 느낀 감상, 불만, 질문, 취향을 자유롭게 말하면 AI가 그 흐름을 이해하고 대화를 이어갑니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="features-section">
+          <div class="features-container">
+            <div class="features-grid">
+              <div class="feature-card">
+                <div class="feature-icon-box"><svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zM9.5 9h.01m4.99 0h.01"></path><path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path></g></svg></div>
+                <h3 class="section-subtitle">자유 대화</h3>
+                <p class="section-content">형식에 맞춘 입력 없이 편하게 떠오르는 생각을 말할 수 있습니다.</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-box"><svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5m3 8a4.17 4.17 0 0 1-3-4a4.17 4.17 0 0 1-3 4m8.598-6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"></path><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"></path><path d="M18 18a4 4 0 0 0 2-7.464"></path><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"></path><path d="M6 18a4 4 0 0 1-2-7.464"></path><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"></path></g></svg></div>
+                <h3 class="section-subtitle">자연스러운 의견 교환</h3>
+                <p class="section-content">AI가 공감, 질문, 반박을 섞어 실제 대화처럼 자연스럽게 이어갑니다.</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-box"><svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+                <h3 class="section-subtitle">대화 속 취향 파악</h3>
+                <p class="section-content">사용자가 무엇을 좋아하는지 대화 흐름 속에서 자연스럽게 파악합니다.</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon-box"><svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9a9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5m4-1v5l4 2"></path></g></svg></div>
+                <h3 class="section-subtitle">이전 대화 이어가기</h3>
+                <p class="section-content">최근 대화를 다시 불러와 이어서 이야기할 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="example-section">
+          <div class="example-container">
+            <h2 class="section-title">이런 식으로 대화할 수 있습니다</h2>
+            <div class="example-grid">
+              <div class="example-card">
+                <div class="user chat-bubble"><span class="chat-label">사용자</span><p class="section-content">요즘 애니 결말이 너무 급하게 끝나는 것 같아.</p></div>
+                <div class="chat-bubble ai"><span class="chat-label">DebateMind AI</span><p class="section-content">그렇게 느낄 수 있어요. 결말이 짧아서라기보다 이전 감정선이 충분히 정리되지 않으면 급하게 느껴질 때가 많죠.</p></div>
+              </div>
+              <div class="example-card">
+                <div class="user chat-bubble"><span class="chat-label">사용자</span><p class="section-content">드라마에서 억지 갈등 나오면 바로 몰입이 깨져.</p></div>
+                <div class="chat-bubble ai"><span class="chat-label">DebateMind AI</span><p class="section-content">맞아요. 현실성을 중요하게 볼수록 인물의 선택이 납득되지 않으면 몰입이 크게 흔들릴 수 있어요.</p></div>
+              </div>
+              <div class="example-card">
+                <div class="user chat-bubble"><span class="chat-label">사용자</span><p class="section-content">먼치킨 주인공도 처음엔 재밌는데 오래 보면 질려.</p></div>
+                <div class="chat-bubble ai"><span class="chat-label">DebateMind AI</span><p class="section-content">주인공이 강한 것보다 긴장감이 사라질 때 지루해지기 쉬워요. 약점과 대가가 있으면 훨씬 오래 흥미를 유지할 수 있습니다.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta-section">
+          <div class="cta-container">
+            <div class="cta-split">
+              <div class="anime cta-box">
+                <h3 class="section-subtitle">애니메이션 채팅</h3>
+                <p class="section-content">애니 결말, 캐릭터 유형, 세계관, 작화, 연출, 장르 문법까지 자유롭게 이야기해보세요.</p>
+                <a href="anime-chat.html"><div class="btn-primary btn"><span>애니 채팅 시작하기</span></div></a>
+              </div>
+              <div class="drama cta-box">
+                <h3 class="section-subtitle">드라마 채팅</h3>
+                <p class="section-content">드라마의 현실성, 인물 관계, 갈등 구조, 연기, 사회적 메시지까지 자유롭게 이야기해보세요.</p>
+                <a href="drama-chat.html"><div class="btn-primary btn"><span>드라마 채팅 시작하기</span></div></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="steps-section"><div class="steps-container"><p class="home-thq-section-content-elm23 section-content">대화하면서 생각이 자연스럽게 정리됩니다.</p></div></section>
+        <section class="guide-section"><div class="guide-container"><p class="home-thq-section-content-elm24 section-content">대화 요약과 최근 기록 관리 같은 기본 기능도 함께 제공합니다.</p></div></section>
+
+        <div class="home-container2">
+          <div class="home-container3">
+            <script defer="" data-name="hero-scroll-interaction">
+              document.addEventListener('DOMContentLoaded', function() {
+                (function() {
+                  const heroBtn = document.querySelector('.hero-btn-secondary');
+                  if (heroBtn) {
+                    heroBtn.addEventListener('mouseenter', () => {
+                      heroBtn.style.transform = 'scale(1.05)';
+                      heroBtn.style.transition = 'transform 0.2s ease';
+                    });
+                    heroBtn.addEventListener('mouseleave', () => {
+                      heroBtn.style.transform = 'scale(1)';
+                    });
+                  }
+
+                  const featureCards = document.querySelectorAll('.feature-card');
+                  featureCards.forEach((card) => {
+                    card.addEventListener('mouseenter', () => {
+                      card.style.boxShadow = '0 12px 24px rgba(30, 58, 95, 0.1)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                      card.style.boxShadow = 'var(--shadow-level-1)';
+                    });
+                  });
+                })();
+              });
+            </script>
+          </div>
+        </div>
+
+        <footer-wrapper class="footer-wrapper">
+          <div class="footer-container">
+            <footer class="footer-root">
+              <div class="footer-container">
+                <div class="footer-content">
+                  <div class="footer-brand-section">
+                    <h2 class="footer-brand-title">DebateMind</h2>
+                    <p class="footer-brand-description">애니메이션과 드라마를 자유롭게 이야기하는 AI 채팅 프로젝트</p>
+                    <p class="footer-brand-subtext">사용자의 생각을 이해하고 자연스럽게 대화를 이어갑니다.</p>
+                  </div>
+                  <div class="footer-nav-section">
+                    <div class="footer-nav-group">
+                      <span class="footer-group-label">서비스</span>
+                      <ul class="footer-link-list">
+                        <li class="footer-link-item"><a href="index.html"><div class="footer-link"><span>소개</span></div></a></li>
+                        <li class="footer-link-item"><a href="anime-chat.html"><div class="footer-link"><span>애니 채팅</span></div></a></li>
+                        <li class="footer-link-item"><a href="drama-chat.html"><div class="footer-link"><span>드라마 채팅</span></div></a></li>
+                      </ul>
+                    </div>
+                    <div class="footer-nav-group"><span class="footer-group-label">커뮤니티</span><div class="footer-social-links"><a href="#"><div aria-label="Chat" class="footer-social-icon"><svg fill="none" width="20" xmlns="http://www.w3.org/2000/svg" height="20" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path></svg></div></a></div></div>
+                  </div>
+                </div>
+                <div class="footer-bottom">
+                  <div class="footer-divider"></div>
+                  <div class="footer-legal-row">
+                    <p class="footer-copyright">&copy; 2024 DebateMind. All rights reserved.</p>
+                    <div class="footer-legal-links">
+                      <a href="#"><div class="footer-legal-link"><span>이용약관</span></div></a>
+                      <a href="#"><div class="footer-legal-link"><span>개인정보처리방침</span></div></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </footer-wrapper>
+      </div>
+      <link rel="canonical" href="https://excited-leafy-lion-qsl7fk.teleporthq.site/" />
+    </div>
+  </body>
+</html>

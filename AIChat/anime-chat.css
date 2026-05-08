@@ -1,0 +1,45 @@
+.navigation-wrapper {
+  display: contents;
+}
+
+.navigation-container1 {
+  display: contents;
+}
+
+.navigation-container2 {
+  display: none;
+}
+
+.navigation-container3 {
+  display: contents;
+}
+
+.footer-wrapper {
+  display: contents;
+}
+
+.footer-container {
+  display: contents;
+}
+
+.page-container1 {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.page-container2 {
+  display: none;
+}
+
+.page-container3 {
+  display: contents;
+}
+
+.anime-theme {
+  --chat-theme-primary: #355c9a;
+  --chat-theme-secondary: #6f8fd6;
+  --chat-theme-soft: #eef4ff;
+  --chat-theme-tint: #f7faff;
+  --chat-theme-border: #b8c9ee;
+  --chat-theme-bubble: #e8f0ff;
+}

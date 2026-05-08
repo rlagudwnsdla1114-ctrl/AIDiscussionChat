@@ -1,0 +1,45 @@
+.navigation-wrapper {
+  display: contents;
+}
+
+.navigation-container1 {
+  display: contents;
+}
+
+.navigation-container2 {
+  display: none;
+}
+
+.navigation-container3 {
+  display: contents;
+}
+
+.footer-wrapper {
+  display: contents;
+}
+
+.footer-container {
+  display: contents;
+}
+
+.page1-container1 {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.page1-container4 {
+  display: none;
+}
+
+.page1-container5 {
+  display: contents;
+}
+
+.drama-theme {
+  --chat-theme-primary: #8a4d3c;
+  --chat-theme-secondary: #b97b62;
+  --chat-theme-soft: #fff2eb;
+  --chat-theme-tint: #fffaf6;
+  --chat-theme-border: #e3c4b5;
+  --chat-theme-bubble: #fff1e8;
+}
