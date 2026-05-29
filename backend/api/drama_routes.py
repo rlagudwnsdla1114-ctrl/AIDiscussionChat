@@ -12,6 +12,7 @@ router = APIRouter(prefix="/api/drama", tags=["drama"])
 def drama_chat(request: ChatRequest) -> ChatResponse:
     answer, sources = handle_drama_chat(
         message=request.message,
+        mode=request.mode,
         history=[item.model_dump() for item in (request.history or [])],
     )
     return ChatResponse(answer=answer, sources=sources)

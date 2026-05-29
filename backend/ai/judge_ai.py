@@ -6,9 +6,8 @@ from backend.services.gpt_client import generate_json_answer
 
 
 OUT_OF_SCOPE_MESSAGE = (
-    "\uc774 \uc11c\ube44\uc2a4\ub294 \uc560\ub2c8\uc640 \ub4dc\ub77c\ub9c8\uc5d0 \ub300\ud55c \ud1a0\ub860, "
-    "\ucd94\ucc9c, \uc124\uba85\uc744 \uc704\ud55c \uc11c\ube44\uc2a4\uc785\ub2c8\ub2e4. "
-    "\uc560\ub2c8 \ub610\ub294 \ub4dc\ub77c\ub9c8 \uad00\ub828 \uc774\uc57c\uae30\ub97c \ud574\uc8fc\uc138\uc694."
+    "이 서비스는 애니와 드라마에 대한 토론, 추천, 설명을 위한 서비스입니다. "
+    "애니 또는 드라마 관련 이야기를 해주세요."
 )
 
 JUDGE_SYSTEM_PROMPT = """
@@ -16,11 +15,12 @@ You are a classifier for an anime/drama chat service.
 Return JSON only.
 
 Decide whether the user's message is related to the current chat room domain.
-- domain=anime: anime discussion, recommendation, explanation, titles, characters, scenes, plot, ending, or emotion that can naturally continue into anime conversation => related true
-- domain=drama: drama discussion, recommendation, explanation, titles, characters, scenes, plot, ending, or emotion that can naturally continue into drama conversation => related true
+- domain=anime: anime discussion, recommendation, explanation, titles, characters, scenes, plot, ending, directing, worldbuilding, themes, or emotions that can naturally continue into anime conversation => related true
+- domain=drama: drama discussion, recommendation, explanation, titles, characters, scenes, plot, ending, directing, themes, messages, or emotions that can naturally continue into drama conversation => related true
 - Generic unrelated talk like food, coding help, errands, and off-topic requests => related false
-- If the user explicitly denies the topic like "애니 얘기 아니야" or "드라마 얘기 아니야", return false
+- If the user explicitly denies the topic such as "애니 얘기 아니야" or "드라마 얘기 아니야", return false
 - Ambiguous emotional messages should be judged generously based on the current domain
+- If mode=discussion, also consider whether the message can become a debate topic about the domain even when it is phrased as an opinion, criticism, comparison, or interpretation
 
 True JSON shape:
 {"related": true, "reason": "..."}
@@ -30,52 +30,70 @@ False JSON shape:
 """.strip()
 
 NEGATIVE_PHRASES = {
-    "\uc560\ub2c8 \uc598\uae30 \uc544\ub2c8\uc57c",
-    "\ub4dc\ub77c\ub9c8 \uc598\uae30 \uc544\ub2c8\uc57c",
+    "애니 얘기 아니야",
+    "드라마 얘기 아니야",
 }
 
 RELATED_KEYWORDS = {
     "anime": [
-        "\uc560\ub2c8",
-        "\uc560\ub2c8\uba54",
-        "\ub9cc\ud654",
-        "\uce90\ub9ad\ud130",
-        "\uc7a5\uba74",
-        "\uc804\uac1c",
-        "\uacb0\ub9d0",
-        "\ucd94\ucc9c",
-        "\ubcfc \uac70",
-        "\uc791\ud488",
+        "애니",
+        "애니메이션",
+        "만화",
+        "캐릭터",
+        "장면",
+        "전개",
+        "결말",
+        "추천",
+        "볼 거",
+        "작품",
+        "설정",
+        "연출",
     ],
     "drama": [
-        "\ub4dc\ub77c\ub9c8",
-        "\ub4f1\uc7a5\uc778\ubb3c",
-        "\uc778\ubb3c",
-        "\uc7a5\uba74",
-        "\uc804\uac1c",
-        "\uacb0\ub9d0",
-        "\ucd94\ucc9c",
-        "\ubcfc \uac70",
-        "\uc791\ud488",
+        "드라마",
+        "등장인물",
+        "인물",
+        "장면",
+        "전개",
+        "결말",
+        "추천",
+        "볼 거",
+        "작품",
+        "메시지",
+        "연출",
     ],
 }
 
 EMOTIONAL_KEYWORDS = [
-    "\ud798\ub4e4",
-    "\ub2f5\ub2f5",
-    "\uc2ac\ud504",
-    "\uc9dc\uc99d",
-    "\ud654\ub098",
-    "\uc5f4\ubc1b",
-    "\uc124\ub808",
-    "\uc6b0\uc6b8",
-    "\ubb34\uc11d",
-    "\uc7ac\ubc0c",
-    "\uc7ac\ubbf8\uc5c6",
+    "힘들",
+    "답답",
+    "슬프",
+    "짜증",
+    "화나",
+    "열받",
+    "설레",
+    "우울",
+    "무섭",
+    "재밌",
+    "재미없",
+]
+
+DISCUSSION_KEYWORDS = [
+    "과대평가",
+    "저평가",
+    "별로",
+    "억지",
+    "이해 안",
+    "납득",
+    "왜",
+    "vs",
+    "비교",
+    "반박",
+    "토론",
 ]
 
 
-def _fallback_judgement(domain: str, message: str) -> dict:
+def _fallback_judgement(domain: str, message: str, mode: str = "normal") -> dict:
     text = message.strip().lower()
     if not text:
         return {"related": False, "message": OUT_OF_SCOPE_MESSAGE}
@@ -95,6 +113,12 @@ def _fallback_judgement(domain: str, message: str) -> dict:
             "reason": f"The emotional message can naturally continue into {domain} discussion.",
         }
 
+    if mode == "discussion" and any(keyword in text for keyword in DISCUSSION_KEYWORDS):
+        return {
+            "related": True,
+            "reason": f"The message can continue as a {domain} debate topic.",
+        }
+
     return {"related": False, "message": OUT_OF_SCOPE_MESSAGE}
 
 
@@ -102,6 +126,7 @@ def judge_related_conversation(
     *,
     domain: str,
     message: str,
+    mode: str = "normal",
     history: List[dict] | None = None,
 ) -> dict:
     history_lines = []
@@ -113,11 +138,13 @@ def judge_related_conversation(
 
     user_prompt = (
         f"domain: {domain}\n"
+        f"mode: {mode}\n"
         f"recent_history:\n{chr(10).join(history_lines) if history_lines else '(none)'}\n\n"
         f"user_message:\n{message}"
     )
-    fallback_payload = _fallback_judgement(domain, message)
+    fallback_payload = _fallback_judgement(domain, message, mode)
     result = generate_json_answer(
+        domain=domain,
         system_prompt=JUDGE_SYSTEM_PROMPT,
         user_prompt=user_prompt,
         fallback_payload=fallback_payload,

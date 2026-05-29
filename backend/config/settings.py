@@ -19,6 +19,10 @@ STORAGE_DIR = BACKEND_DIR / "storage"
 FILE_HASH_PATH = STORAGE_DIR / "file_hashes.json"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+ANIME_JUDGMENT_API_KEY = os.getenv("ANIME_JUDGMENT_API_KEY", "")
+DRAMA_JUDGMENT_API_KEY = os.getenv("DRAMA_JUDGMENT_API_KEY", "")
+ANIME_DISCUSSION_API_KEY = os.getenv("ANIME_DISCUSSION_API_KEY", "")
+DRAMA_DISCUSSION_API_KEY = os.getenv("DRAMA_DISCUSSION_API_KEY", "")
 GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4.1-mini")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
 

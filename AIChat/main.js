@@ -58,7 +58,7 @@
     }
   }
 
-  async function requestChatAnswer(config, message) {
+  async function requestChatAnswer(config, message, mode) {
     const response = await fetch(`${getApiBaseUrl()}${config.endpoint}`, {
       method: "POST",
       headers: {
@@ -66,6 +66,7 @@
       },
       body: JSON.stringify({
         message,
+        mode,
         history: getActiveConversationHistory(config.storageKey),
       }),
     });
@@ -93,12 +94,16 @@
 
     document.addEventListener(config.sendEventName, async function (event) {
       const message = event.detail && event.detail.text ? event.detail.text.trim() : "";
+      const mode =
+        event.detail && (event.detail.mode === "discussion" || event.detail.mode === "normal")
+          ? event.detail.mode
+          : "normal";
       if (!message) {
         return;
       }
 
       try {
-        const payload = await requestChatAnswer(config, message);
+        const payload = await requestChatAnswer(config, message, mode);
         dispatchAssistantMessage(config.receiveEventName, payload.answer || config.fallback);
       } catch (error) {
         dispatchAssistantMessage(config.receiveEventName, config.fallback);
