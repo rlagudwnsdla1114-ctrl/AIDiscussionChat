@@ -1,26 +1,41 @@
 from __future__ import annotations
 
 import json
-from typing import List
+from typing import List, Literal
 
 from openai import OpenAI
 
 from backend.config import settings
 
+ClientPurpose = Literal["judgment", "discussion"]
 
-def _client() -> OpenAI | None:
-    if not settings.OPENAI_API_KEY:
+
+def _resolve_api_key(*, domain: str, purpose: ClientPurpose) -> str:
+    key_map = {
+        ("anime", "judgment"): settings.ANIME_JUDGMENT_API_KEY,
+        ("drama", "judgment"): settings.DRAMA_JUDGMENT_API_KEY,
+        ("anime", "discussion"): settings.ANIME_DISCUSSION_API_KEY,
+        ("drama", "discussion"): settings.DRAMA_DISCUSSION_API_KEY,
+    }
+    return key_map.get((domain, purpose), "")
+
+
+def _client(*, domain: str, purpose: ClientPurpose) -> OpenAI | None:
+    api_key = _resolve_api_key(domain=domain, purpose=purpose)
+    if not api_key:
         return None
-    return OpenAI(api_key=settings.OPENAI_API_KEY)
+    return OpenAI(api_key=api_key)
 
 
 def _chat_completion(
     *,
+    domain: str,
+    purpose: ClientPurpose,
     messages: List[dict],
     temperature: float,
     response_format: dict | None = None,
 ) -> str:
-    client = _client()
+    client = _client(domain=domain, purpose=purpose)
     if client is None:
         raise RuntimeError("OpenAI client is unavailable.")
 
@@ -81,11 +96,13 @@ def generate_chat_answer(
     history: List[dict] | None,
     system_prompt: str,
 ) -> str:
-    if _client() is None:
+    if _client(domain=domain, purpose="discussion") is None:
         return _fallback_answer(domain, question, context)
 
     try:
         answer = _chat_completion(
+            domain=domain,
+            purpose="discussion",
             messages=_build_messages(system_prompt, question, context, history),
             temperature=0.8,
         )
@@ -96,15 +113,18 @@ def generate_chat_answer(
 
 def generate_json_answer(
     *,
+    domain: str,
     system_prompt: str,
     user_prompt: str,
     fallback_payload: dict,
 ) -> dict:
-    if _client() is None:
+    if _client(domain=domain, purpose="judgment") is None:
         return fallback_payload
 
     try:
         content = _chat_completion(
+            domain=domain,
+            purpose="judgment",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
